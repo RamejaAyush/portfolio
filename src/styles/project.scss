@@ -1,0 +1,291 @@
+:root {
+  --blue: #0066ff;
+}
+
+.project-container {
+  width: 100%;
+  height: auto;
+  background-color: black;
+  padding: 0 5%;
+
+  .header {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+
+    h1 {
+      font-size: 5vw;
+      color: var(--blue);
+
+      @media (max-width: 600px) {
+        font-size: 10vw;
+      }
+    }
+  }
+
+  .all-projects {
+    width: 100%;
+    height: auto;
+
+    .project {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+
+      .banner {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 25%;
+        height: 100%;
+
+        @media (max-width: 600px) {
+          display: none;
+        }
+
+        .container {
+          width: 90%;
+          height: 90%;
+          background-image: url('../assets/blue-texture.png');
+          display: flex;
+          align-items: center;
+          border-radius: 10px;
+          transition: all 250ms ease-in-out;
+
+          h1 {
+            color: var(--blue);
+            transform: rotate(-90deg);
+            font-size: 6vw;
+          }
+        }
+      }
+
+      .content {
+        width: 75%;
+        height: 100%;
+        padding: 5%;
+
+        @media (max-width: 600px) {
+          width: 100%;
+          padding: 0%;
+        }
+
+        .title {
+          width: 100%;
+          height: 10%;
+          display: flex;
+          align-items: center;
+
+          h1 {
+            font-size: 3vw;
+            color: var(--blue);
+
+            @media (max-width: 600px) {
+              font-size: 6vw;
+            }
+          }
+        }
+
+        .details {
+          width: 100%;
+          height: 15%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+
+          p {
+            color: white;
+            font-size: 1.5vw;
+            font-weight: 700;
+
+            @media (max-width: 600px) {
+              font-size: 5vw;
+            }
+          }
+        }
+
+        .points {
+          width: 100%;
+          height: 50%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+          color: white;
+
+          @media (max-width: 600px) {
+            height: 70%;
+          }
+
+          .about {
+            line-height: 2.2vw;
+            font-size: 1.5vw;
+
+            @media (max-width: 600px) {
+              line-height: 7vw;
+              font-size: 5vw;
+            }
+          }
+
+          ul {
+            padding: 0 5%;
+            line-height: 2.2vw;
+
+            li {
+              font-size: 1.5vw;
+
+              @media (max-width: 600px) {
+                line-height: 7vw;
+                font-size: 5vw;
+              }
+            }
+          }
+        }
+
+        .btns {
+          width: 100%;
+          height: 25%;
+          display: flex;
+          align-items: flex-end;
+          gap: 2vw;
+
+          @media (max-width: 600px) {
+            display: none;
+          }
+
+          a {
+            z-index: 1;
+            position: relative;
+            border-radius: 5px;
+            border: 0.5px solid #0066ff6e;
+            padding: 0.8vw;
+            text-decoration: none;
+            color: var(--blue);
+            font-size: 1.5vw;
+            font-weight: 700;
+            transition: all 250ms ease-in-out;
+
+            &::after {
+              position: absolute;
+              content: '';
+              border-radius: 5px;
+              z-index: -1;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 0;
+              background-color: #0066ff;
+              transition: all 250ms ease-in-out;
+            }
+
+            &:hover {
+              color: var(--white);
+            }
+
+            &:hover::after {
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  .special-mention {
+    width: 100%;
+    height: 60vh;
+    padding: 2.5%;
+
+    .container {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      background-attachment: fixed;
+      background-image: url('../assets/special-bg.png');
+      background-size: cover;
+      background-position: bottom;
+      display: grid;
+      place-items: center;
+
+      @media (max-width: 600px) {
+        background-attachment: scroll;
+      }
+
+      .solid-bg {
+        width: 50%;
+        height: 70%;
+        background-color: rgba(0, 0, 0, 0.233);
+        backdrop-filter: blur(2px);
+        border-radius: 30px;
+        padding: 2.5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        line-height: 2vw;
+
+        @media (max-width: 600px) {
+          padding: 5%;
+          width: 100%;
+          height: 100%;
+          display: grid;
+          place-items: center;
+          line-height: 7vw;
+        }
+
+        p {
+          color: white;
+          font-size: 1.25vw;
+          font-weight: 600;
+
+          @media (max-width: 600px) {
+            font-size: 5vw;
+          }
+        }
+
+        .btns {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          gap: 2vw;
+
+          @media (max-width: 600px) {
+            display: none;
+          }
+
+          a {
+            z-index: 1;
+            position: relative;
+            border-radius: 5px;
+            border: 0.5px solid #ffffff6e;
+            padding: 0.5vw 0.8vw;
+            text-decoration: none;
+            color: white;
+            font-size: 1vw;
+            font-weight: 400;
+            transition: all 250ms ease-in-out;
+
+            &::after {
+              position: absolute;
+              content: '';
+              border-radius: 5px;
+              z-index: -1;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 0;
+              background-color: #ffffff;
+              transition: all 250ms ease-in-out;
+            }
+
+            &:hover {
+              color: black;
+            }
+
+            &:hover::after {
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

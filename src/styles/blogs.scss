@@ -1,0 +1,103 @@
+@import url(./global.scss);
+
+.blogs {
+  padding: 0 5%;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--black);
+  color: var(--white);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.733) 0%,
+    rgba(0, 0, 0, 0.897) 48%,
+    rgb(0, 0, 0) 100%
+  );
+
+  nav {
+    padding: 0 2.5%;
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left-logo,
+    .center-logo {
+      h1 {
+        font-size: 1.8vw;
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+
+        span {
+          padding: 0.5vw;
+          font-size: 0.8vw;
+          border: 0.1vw solid var(--white);
+          color: var(--white);
+          font-weight: 700;
+          border-radius: 2vw;
+        }
+      }
+    }
+
+    .nav-links {
+      a {
+        text-decoration: none;
+        color: var(--white);
+        font-size: 1.2vw;
+      }
+    }
+  }
+
+  .blog-content {
+    width: 100%;
+    height: 90vh;
+    border-radius: 5vw;
+    background-color: var(--black);
+    padding: 0 2.5%;
+
+    .header {
+      padding: 0 2.5%;
+      width: 100%;
+      height: 20vh;
+      display: flex;
+      align-items: center;
+
+      h1 {
+        font-size: 5vw;
+      }
+    }
+
+    .all-blogs {
+      padding: 1% 1.5%;
+      width: 100%;
+      height: 70vh;
+      background-color: #380079;
+      border-radius: 2vw 2vw 0 0;
+
+      .blog {
+        padding: 0 2.5%;
+        width: 100%;
+        height: 10vh;
+        border-radius: 1vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        h2 {
+          font-size: 1.5vw;
+        }
+
+        &.border {
+          border: 0.1vw solid #ffffff3f;
+          border-style: dashed;
+        }
+
+        &.dull {
+          color: #ffffff3f;
+        }
+      }
+    }
+  }
+}
