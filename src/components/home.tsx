@@ -1,18 +1,18 @@
-import '../styles/home.scss';
-import Project from './project';
-import Contact from './contact';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import image from '../assets/home-bg.png';
-import { useState, useEffect } from 'react';
-import PageTranstition from './pageTranstition';
+import "../styles/home.scss";
+import Project from "./project";
+import Contact from "./contact";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import image from "../assets/home-bg.png";
+import { useState, useEffect } from "react";
+import PageTranstition from "./pageTranstition";
 
 const Home = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
-    document.title = 'About: Ayush Rameja';
+    document.title = "About: Ayush Rameja";
   }, []);
 
   useEffect(() => {
@@ -44,10 +44,10 @@ const Home = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -56,7 +56,7 @@ const Home = () => {
     show: { opacity: 1, y: 0 },
   };
 
-  const navClassName = isScrolled ? 'nav-container scrolled' : 'nav-container';
+  const navClassName = isScrolled ? "nav-container scrolled" : "nav-container";
 
   return (
     <PageTranstition>
@@ -65,7 +65,7 @@ const Home = () => {
         style={
           imageLoaded
             ? { backgroundImage: `url(${image})` }
-            : { backgroundColor: 'black' }
+            : { backgroundColor: "black" }
         }
       >
         <nav>
@@ -74,7 +74,7 @@ const Home = () => {
               <p>Ayush Rameja</p>
             </div>
             <div className="nav-links">
-              <Link to={'/resume'}>
+              <Link to={"/resume"}>
                 <span data-hover="Resume">Resume</span>
               </Link>
             </div>
@@ -107,11 +107,11 @@ const Home = () => {
               transition={{ duration: 1.5, delay: 0.2 }}
               className="animate-text"
             >
-              <Link to={'/'}>
+              <Link to={"/"}>
                 <span data-hover="Clean">Clean</span>
               </Link>
               <p>&</p>
-              <Link to={'/'}>
+              <Link to={"/"}>
                 <span data-hover="Appealing">Appealing</span>
               </Link>
             </motion.div>
@@ -131,7 +131,7 @@ const Home = () => {
                 unique and visually appealing websites and designs.
               </p>
               <div className="btns">
-                <Link to={'/blogs'}>Blogs</Link>
+                <Link to={"/blogs"}>Blogs</Link>
                 <a href="#projects">Projects</a>
                 <a href="#contact">Contact</a>
               </div>
