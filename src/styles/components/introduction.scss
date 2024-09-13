@@ -1,0 +1,99 @@
+.introduction {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+
+  .left,
+  .right {
+    width: 50%;
+    height: 100%;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5vh;
+
+    .hello-world {
+      p {
+        &.light {
+          font-size: 2.5vw;
+          font-family: var(--font-neue-thin);
+        }
+
+        &.bold {
+          font-size: 5vw;
+          font-family: var(--font-neue-medium);
+        }
+      }
+    }
+
+    .intro {
+      p {
+        font-size: 2vw;
+        line-height: 150%;
+      }
+    }
+
+    .cta {
+      a {
+        width: 13vw;
+        z-index: 1;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.5vw;
+        border-radius: 1.04vw;
+        padding: 0.5vw 0.75vw;
+        color: var(--purple-light);
+        border: 1px solid var(--purple-light);
+        transition: all 300ms ease-in-out;
+
+        .staggered-text {
+          display: flex;
+
+          span {
+            position: relative;
+            display: inline-block;
+            transition: all 300ms ease-in-out;
+            transition-delay: calc(25ms * var(--i));
+            transform: translateY(0);
+
+            &::before {
+              position: absolute;
+              font-size: 1.5vw;
+              color: var(--white);
+              font-weight: 500;
+              top: 150%;
+              content: attr(data-hover);
+              transform: translate3d(0, 0, 0);
+              white-space: pre;
+
+              @media (max-width: 600px) {
+                font-size: 5vw;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          .staggered-text span {
+            transform: translateY(-150%);
+            transition-delay: calc(25ms * var(--i));
+          }
+        }
+
+        &.dark {
+          .staggered-text span {
+            font-family: var(--font-neue-medium);
+          }
+        }
+      }
+    }
+  }
+}
