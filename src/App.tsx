@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import "./styles/components/app.scss";
 import Navbar from "./components/Navbar";
 import { useEffect, useRef } from "react";
+import FloatingBar from "./components/FloatingBar";
 import Introduction from "./components/Introduction";
 
 const App = () => {
@@ -13,7 +14,7 @@ const App = () => {
   useEffect(() => {
     const initializeAnimation = () => {
       lenisRef.current = new Lenis({
-        lerp: 0.1,
+        lerp: 0.08,
       });
 
       const raf = (time: number) => {
@@ -41,6 +42,7 @@ const App = () => {
       <Navbar />
       <Home />
       <Introduction />
+      <FloatingBar />
     </div>
   );
 };

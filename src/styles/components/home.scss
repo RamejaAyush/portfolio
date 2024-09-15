@@ -50,7 +50,7 @@
       height: 100%;
       border-radius: 1.04vw;
       background-color: #000;
-      border: 2px solid var(--purple-light);
+      border: 0.2vw solid var(--purple-light);
 
       video {
         width: 100%;
@@ -67,6 +67,7 @@
 
     p {
       color: var(--purple-light);
+      font-size: 1.5vw;
     }
   }
 }
