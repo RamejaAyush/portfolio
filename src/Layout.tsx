@@ -1,12 +1,11 @@
 import Lenis from "lenis";
-import Home from "./components/Home";
+import App from "./routes/App";
 import "./styles/components/app.scss";
 import Navbar from "./components/Navbar";
 import { useEffect, useRef } from "react";
 import FloatingBar from "./components/FloatingBar";
-import Introduction from "./components/Introduction";
 
-const App = () => {
+const Layout = () => {
   const rafId = useRef<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
   const appRef = useRef<HTMLDivElement>(null);
@@ -40,11 +39,10 @@ const App = () => {
   return (
     <div className="app" ref={appRef}>
       <Navbar />
-      <Home />
-      <Introduction />
+      <App />
       <FloatingBar />
     </div>
   );
 };
 
-export default App;
+export default Layout;

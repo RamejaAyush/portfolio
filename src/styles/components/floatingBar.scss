@@ -3,7 +3,7 @@
   --rounded: 0.625vw;
   --inner-padding: 0.3125vw;
   --rounded-light: 0.4167vw;
-  --animation-duration: 0.4s;
+  --animation-duration: 300ms;
   --bg-menu-wrapper: 224, 180, 251;
 
   left: 0;
@@ -16,6 +16,7 @@
   .nav-wrapper {
     width: auto;
     height: 9vh;
+    overflow: hidden;
     gap: var(--inner-padding);
     padding: var(--inner-padding);
     border-radius: var(--rounded);
@@ -27,10 +28,20 @@
       background-color: #181818;
       border-radius: var(--rounded-light);
 
-      p {
-        font-size: 1.75vw;
-        color: var(--purple-light);
-        font-family: var(--font-protest);
+      .logo-wrapper {
+        p {
+          font-size: 1.75vw;
+          padding-right: 1vw;
+          color: var(--purple-light);
+          font-family: var(--font-protest);
+        }
+
+        span {
+          font-size: 1vw;
+          padding-left: 1vw;
+          color: var(--purple-light);
+          border-left: 1px solid var(--purple-light);
+        }
       }
     }
 
