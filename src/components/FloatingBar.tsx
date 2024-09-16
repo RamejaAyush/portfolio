@@ -1,21 +1,32 @@
+import { useEffect } from "react";
 import useStore from "../store/store";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import "../styles/components/floatingBar.scss";
 import StaggeredText from "../utils/StaggerText";
-import { easeInOut, motion } from "framer-motion";
+import {
+  navVariants,
+  wrapperVariants,
+  linkVariants,
+} from "../animations/animations";
 
 const MotionLink = motion.create(Link);
 
 const FloatingBar = () => {
-  const { route } = useStore();
+  const {
+    route,
+    currentRoute,
+    isAnimatingOut,
+    isContentUpdated,
+    isVisible,
+    setIsAnimatingOut,
+    setIsContentUpdated,
+    setCurrentRoute,
+    setIsVisible,
+  } = useStore();
+
   const outerLinks: string[] = ["Blogs", "Resume"];
   const links: string[] = ["About", "Projects", "Contact"];
-
-  const [isVisible, setIsVisible] = useState<boolean>(false);
-  const [currentRoute, setCurrentRoute] = useState<string>(route);
-  const [isAnimatingOut, setIsAnimatingOut] = useState<boolean>(false);
-  const [isContentUpdated, setIsContentUpdated] = useState<boolean>(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +34,7 @@ const FloatingBar = () => {
       const viewportHeight = window.innerHeight;
 
       setIsVisible(
-        route.toLowerCase() === "about" ? scrolled > 0.2 * viewportHeight : true
+        route.toLowerCase() === "home" ? scrolled > 0.2 * viewportHeight : true
       );
     };
 
@@ -31,7 +42,7 @@ const FloatingBar = () => {
     handleScroll();
 
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [route]);
+  }, [route, setIsVisible]);
 
   useEffect(() => {
     setIsAnimatingOut(true);
@@ -50,41 +61,7 @@ const FloatingBar = () => {
       clearTimeout(exitAnimationTimeout);
       clearTimeout(entryAnimationTimeout);
     };
-  }, [route]);
-
-  const navVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, staggerChildren: 0.1 },
-    },
-    exit: {
-      opacity: 0,
-      y: 30,
-      transition: { duration: 0.5, ease: "easeOut" },
-    },
-  };
-
-  const wrapperVariants = {
-    hidden: { opacity: 0, y: 10 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, ease: easeInOut, staggerChildren: 0.1 },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: { duration: 1, ease: "easeInOut" },
-    },
-  };
-
-  const linkVariants = {
-    hidden: { opacity: 0.5 },
-    visible: { opacity: 1 },
-    exit: { opacity: 0.5, transition: { duration: 0.5 } },
-  };
+  }, [route, setIsAnimatingOut, setIsContentUpdated, setCurrentRoute]);
 
   return (
     <motion.div>
