@@ -1,5 +1,5 @@
 const COMMON_DURATION: number = 0.5;
-const COMMON_Y_OFFSET: number = 10;
+const COMMON_Y_OFFSET: number = 5;
 
 export const navVariants = {
   hidden: { opacity: 0, y: COMMON_Y_OFFSET },

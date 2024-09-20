@@ -10,10 +10,10 @@
   right: 0;
   bottom: 0;
   top: 87vh;
-  z-index: 10;
   position: fixed;
 
   .nav-wrapper {
+    z-index: 10;
     width: auto;
     height: 9vh;
     overflow: hidden;
@@ -85,7 +85,7 @@
               font-size: 1vw;
               color: #fff;
               font-weight: 500;
-              top: 200%;
+              top: 10vh;
               content: attr(data-hover);
               transform: translate3d(0, 0, 0);
               white-space: pre;
@@ -114,7 +114,7 @@
           border: 1px solid #181818;
 
           .staggered-text span {
-            transform: translateY(-200%);
+            transform: translateY(-10vh);
             transition-delay: calc(25ms * var(--i));
           }
 
@@ -171,7 +171,7 @@
             transform: translateY(0);
 
             &::before {
-              top: 220%;
+              top: 10vw;
               font-size: 1vw;
               font-weight: 500;
               white-space: pre;
@@ -194,9 +194,9 @@
           overflow: hidden;
           position: absolute;
           border-radius: 100%;
-          transition: all var(--animation-duration) ease-in-out;
           background-color: #181818;
           transform: translate(-100%, 100%);
+          transition: all var(--animation-duration) ease-in-out;
         }
 
         &:hover {
@@ -204,7 +204,7 @@
           border: 1px solid var(--purple-light);
 
           .staggered-text span {
-            transform: translateY(-220%);
+            transform: translateY(-10vw);
             transition-delay: calc(25ms * var(--i));
           }
 

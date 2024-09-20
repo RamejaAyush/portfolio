@@ -85,10 +85,13 @@ const FloatingBar = () => {
                 className="logo flex align-items-center"
                 variants={linkVariants}
               >
-                <div className="logo-wrapper flex align-items-center">
+                <MotionLink
+                  to={"/"}
+                  className="tdn logo-wrapper flex align-items-center"
+                >
                   <p>AR</p>
                   <span className="title">{currentRoute}</span>
-                </div>
+                </MotionLink>
               </motion.div>
               <motion.div
                 className="inner-links flex align-items-center"

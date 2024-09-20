@@ -11,9 +11,6 @@ const Navbar = () => {
         <a className="tdn" href="#">
           <StaggeredText text="GET IN TOUCH" />
         </a>
-        <a className="tdn dark" href="#">
-          <StaggeredText text="MENU" />
-        </a>
       </div>
     </nav>
   );
