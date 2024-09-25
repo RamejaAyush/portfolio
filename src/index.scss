@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -72,13 +74,18 @@
   src: url("./assets/font/neue/NeueHaasDisplayXThinItalic.ttf");
 }
 
-@font-face {
-  font-family: "Protest";
-  src: url("./assets/font/protest/ProtestGuerrilla-Regular.ttf");
-}
-
 :root {
-  --font-protest: "Protest", sans-serif;
+  // colors
+  --mint: #89e5ff;
+  --white: #ffffff;
+  --black: #000000;
+  --purple: #b089ff;
+  --dull-mint: #001d34;
+  --dull-white: #dbdbdb;
+  --light-black: #0d0d0d;
+  --dull-purple: #130038;
+
+  // fonts
   --font-neue-roman: "Neue Haas Display roman", sans-serif;
   --font-neue-roman-italic: "Neue Haas Display roman italic", sans-serif;
   --font-neue-medium: "Neue Haas Display medium", sans-serif;
@@ -94,6 +101,7 @@
   --font-neue-extra-thin: "Neue Haas Display extra thin", sans-serif;
   --font-neue-extra-thin-italic: "Neue Haas Display extra thin italic",
     sans-serif;
+  --font-trade-winds: "Trade Winds", system-ui;
 }
 
 *,
