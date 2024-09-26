@@ -31,7 +31,7 @@ const Home = () => {
               </div>
               <div className="home__landing__wrapper__content__introduction__cta">
                 <div className="home__landing__wrapper__content__introduction__cta__projects">
-                  <Link to={"/project"}>
+                  <Link to={"/resume"}>
                     <div className="home__landing__wrapper__content__introduction__cta__projects__text">
                       <p>{`< Code Creations >`}</p>
                     </div>
@@ -48,7 +48,7 @@ const Home = () => {
                   </Link>
                 </div>
                 <div className="home__landing__wrapper__content__introduction__cta__blogs">
-                  <Link to={"/project"}>
+                  <Link to={"/blogs"}>
                     <div className="home__landing__wrapper__content__introduction__cta__blogs__text">
                       <p>{`< Blog Overflow >`}</p>
                     </div>
@@ -100,6 +100,14 @@ const Home = () => {
               <source src={backgroundVideo} type="video/mp4" />
             </video>
           </div>
+        </div>
+      </div>
+      <div className="home__projects">
+        <div className="home__projects__header">
+          <p>
+            A quick summary about{" "}
+            <span className="gradient">my experience.</span>
+          </p>
         </div>
       </div>
     </div>

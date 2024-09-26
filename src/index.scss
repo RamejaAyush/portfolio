@@ -1,9 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Trade+Winds&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @font-face {
   font-family: "Neue Haas Display roman";
   src: url("./assets/font/neue/NeueHaasDisplayRoman.ttf");
@@ -113,5 +109,7 @@
 }
 
 body {
+  color: var(--white);
+  background-color: var(--black);
   font-family: var(--font-neue-roman);
 }
