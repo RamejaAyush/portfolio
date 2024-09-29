@@ -1,5 +1,7 @@
 import "../styles/home.scss";
 import { Link } from "react-router-dom";
+import { IProject } from "../models/IProject";
+import { projects } from "../utils/projectData";
 import profilePic from "../assets/image/profile.png";
 import backgroundVideo from "../assets/video/bg-video.mp4";
 
@@ -33,7 +35,7 @@ const Home = () => {
                 <div className="home__landing__wrapper__content__introduction__cta__projects">
                   <Link to={"/resume"}>
                     <div className="home__landing__wrapper__content__introduction__cta__projects__text">
-                      <p>{`< Code Creations >`}</p>
+                      <p>{`< Resume Rundown >`}</p>
                     </div>
                     <div className="home__landing__wrapper__content__introduction__cta__projects__preview">
                       <div className="home__landing__wrapper__content__introduction__cta__projects__preview__wrapper">
@@ -105,9 +107,90 @@ const Home = () => {
       <div className="home__projects">
         <div className="home__projects__header">
           <p>
-            A quick summary about{" "}
-            <span className="gradient">my experience.</span>
+            Behind the Code: <span className="gradient">My Story</span>
           </p>
+        </div>
+        <div className="home__projects__container">
+          {projects.map((project: IProject) => (
+            <div
+              className={`home__projects__container__project ${project.id}`}
+              key={project.id}
+            >
+              <div className="home__projects__container__project__client">
+                <div className="home__projects__container__project__client__wrapper">
+                  <h1>{project.client}</h1>
+                </div>
+              </div>
+              <div className="home__projects__container__project__content">
+                <div className="home__projects__container__project__content__name">
+                  <h1>{project.name}</h1>
+                </div>
+                <div className="home__projects__container__project__content__role">
+                  <p>{project.role}</p>
+                </div>
+                <div className="home__projects__container__project__content__skills">
+                  <p>{project.skills.join(", ")}</p>
+                </div>
+                <div className="home__projects__container__project__content__points">
+                  <ul>
+                    {project.points.map((point: string, index: number) => (
+                      <li key={index}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="home__projects__container__project__content__cta">
+                  <Link to={`${project.link}`}>See More</Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="home__contact">
+        <div className="home__contact__wrapper">
+          <div className="home__contact__wrapper__form">
+            <div className="home__contact__wrapper__form__header">
+              <h1>
+                Ping Me, <span className="gradient">Let's Make Magic</span>
+              </h1>
+            </div>
+            <div className="home__contact__wrapper__form__inputs">
+              <form>
+                <div className="name">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    placeholder="Please enter your name… if you dare."
+                  />
+                </div>
+                <div className="message">
+                  <label htmlFor="message">Message</label>
+                  <textarea
+                    name="message"
+                    id="message"
+                    required
+                    placeholder="Say something smart or funny, no pressure."
+                  ></textarea>
+                </div>
+                <div className="submit">
+                  <input type="submit" value="Send" />
+                </div>
+              </form>
+            </div>
+          </div>
+          <div className="home__contact__wrapper__links">
+            <div className="home__contact__wrapper__links__header">
+              <h1>Links</h1>
+            </div>
+            <div className="home__contact__wrapper__links__buttons">
+              <Link to={"/"}>Mail</Link>
+              <Link to={"/"}>LinkedIn</Link>
+              <Link to={"/"}>GitHub</Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
