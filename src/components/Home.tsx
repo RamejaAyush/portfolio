@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="home__landing">
+      <div id="about" className="home__landing">
         <motion.div
           className="home__landing__wrapper"
           variants={containerVariants}
@@ -139,7 +139,7 @@ const Home = () => {
           </motion.div>
         </motion.div>
       </div>
-      <div className="home__projects">
+      <div id="projects" className="home__projects">
         <div className="home__projects__header">
           <p>
             Behind the Code: <span className="gradient">My Story</span>
@@ -181,7 +181,7 @@ const Home = () => {
           ))}
         </div>
       </div>
-      <div className="home__contact">
+      <div id="contact" className="home__contact">
         <div className="home__contact__wrapper">
           <div className="home__contact__wrapper__form">
             <div className="home__contact__wrapper__form__header">

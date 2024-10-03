@@ -1,52 +1,23 @@
 import { create } from "zustand";
 
-interface IState {
-  route: string;
-  isVisible: boolean;
+interface AppState {
+  navClass: string;
+  isLoading: boolean;
   currentRoute: string;
-  isAnimatingOut: boolean;
-  isContentUpdated: boolean;
-  setRoute: (route: string) => void;
-  setIsVisible: (visible: boolean) => void;
+  showExternal: boolean;
+  setNavClass: (navClass: string) => void;
+  setIsLoading: (loading: boolean) => void;
+  setShowExternal: (show: boolean) => void;
   setCurrentRoute: (route: string) => void;
-  setIsAnimatingOut: (isAnimating: boolean) => void;
-  setIsContentUpdated: (isUpdated: boolean) => void;
 }
 
-const useStore = create<IState>((set) => ({
-  route: "about",
-  isVisible: false,
-  currentRoute: "about",
-  isAnimatingOut: false,
-  isContentUpdated: true,
-
-  setRoute: (route: string) => {
-    let routeName;
-
-    switch (route) {
-      case "/":
-        routeName = "Home";
-        break;
-      case "/blogs":
-        routeName = "Blogs";
-        break;
-      case "/resume":
-        routeName = "Resume";
-        break;
-      default:
-        console.error(`Unhandled route: ${route}`);
-        return;
-    }
-
-    set({ route: routeName });
-  },
-
-  setIsAnimatingOut: (isAnimating: boolean) =>
-    set({ isAnimatingOut: isAnimating }),
-  setIsContentUpdated: (isUpdated: boolean) =>
-    set({ isContentUpdated: isUpdated }),
-  setIsVisible: (visible: boolean) => set({ isVisible: visible }),
+export const useAppStore = create<AppState>((set) => ({
+  isLoading: true,
+  navClass: "grey",
+  showExternal: false,
+  currentRoute: "Home",
+  setNavClass: (navClass: string) => set({ navClass }),
+  setIsLoading: (loading: boolean) => set({ isLoading: loading }),
+  setShowExternal: (show: boolean) => set({ showExternal: show }),
   setCurrentRoute: (route: string) => set({ currentRoute: route }),
 }));
-
-export default useStore;

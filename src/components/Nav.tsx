@@ -1,13 +1,18 @@
 import "../styles/nav.scss";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useAppStore } from "../store/store";
+import { Link, useLocation } from "react-router-dom";
 
 const Nav = () => {
-  const MotionLink = motion(Link);
-  const currentRoute: string = "About";
-  const [showExternal, setShowExternal] = useState(false);
-  const [navClass, setNavClass] = useState<string>("grey");
+  const location = useLocation();
+  const MotionLink = motion.create(Link);
+
+  const navClass = useAppStore((state) => state.navClass);
+  const setNavClass = useAppStore((state) => state.setNavClass);
+  const showExternal = useAppStore((state) => state.showExternal);
+  const currentRoute = useAppStore((state) => state.currentRoute);
+  const setShowExternal = useAppStore((state) => state.setShowExternal);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +27,14 @@ const Nav = () => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [setNavClass, setShowExternal]);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      console.log(location.pathname);
+      setShowExternal(false);
+    }
+  }, [location.pathname, setShowExternal]);
 
   const linkVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -30,8 +42,8 @@ const Nav = () => {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.2,
-        duration: 0.5,
+        delay: i * 0.3,
+        duration: 0.1,
       },
     }),
   };
@@ -55,23 +67,39 @@ const Nav = () => {
             {currentRoute}
           </span>
         </MotionLink>
-
         <div className="nav__wrapper__links">
           <div className="nav__wrapper__links__wrapper">
-            {["About", "Projects", "Contact"].map((link, i) => (
-              <motion.div
-                key={link}
-                custom={i}
-                initial="hidden"
-                animate="visible"
-                variants={linkVariants}
-                className="nav__wrapper__links__wrapper__link"
-              >
-                <Link to={link === "About" ? "/" : `/#${link.toLowerCase()}`}>
-                  {link}
-                </Link>
-              </motion.div>
-            ))}
+            {currentRoute === "Home"
+              ? ["About", "Projects", "Contact"].map((link, i) => (
+                  <motion.a
+                    key={link}
+                    custom={i}
+                    href={`/#${link.toLowerCase()}`}
+                    initial="hidden"
+                    animate="visible"
+                    variants={linkVariants}
+                    className="nav__wrapper__links__wrapper__link"
+                  >
+                    {link}
+                  </motion.a>
+                ))
+              : ["Portfolio", "Blogs", "Resume"].map(
+                  (link: string, i: number) => (
+                    <MotionLink
+                      key={link}
+                      custom={i}
+                      initial="hidden"
+                      animate="visible"
+                      variants={linkVariants}
+                      className="nav__wrapper__links__wrapper__link"
+                      to={`${
+                        link === "Portfolio" ? "/" : `/${link.toLowerCase()}`
+                      }`}
+                    >
+                      {link}
+                    </MotionLink>
+                  )
+                )}
           </div>
         </div>
         {["Blogs", "Resume"].map((externalLink: string, i: number) => (

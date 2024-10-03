@@ -1,8 +1,9 @@
 import Lenis from "lenis";
 import "./styles/app.scss";
+import { Suspense, lazy } from "react";
 import { useEffect, useRef } from "react";
-import { Suspense, lazy, useState } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useAppStore } from "./store/store";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 const Nav = lazy(() => import("./components/Nav"));
 const Home = lazy(() => import("./components/Home"));
@@ -13,12 +14,20 @@ const Loading = lazy(() => import("./components/Loading"));
 function App() {
   const rafId = useRef<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const previousPathRef = useRef<string | null>(null);
+
+  const isLoading = useAppStore((state) => state.isLoading);
+  const setNavClass = useAppStore((state) => state.setNavClass);
+  const setIsLoading = useAppStore((state) => state.setIsLoading);
+  const setCurrentRoute = useAppStore((state) => state.setCurrentRoute);
+  const setShowExternal = useAppStore((state) => state.setShowExternal);
+
+  const location = useLocation();
 
   useEffect(() => {
     const initializeAnimation = () => {
       lenisRef.current = new Lenis({
-        lerp: 0.08,
+        lerp: 0.1,
       });
 
       const raf = (time: number) => {
@@ -42,14 +51,30 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    const pathName = location.pathname;
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, []);
+    if (previousPathRef.current !== pathName) {
+      let route = "Home";
+      if (pathName.includes("/blogs")) {
+        route = "Blogs";
+      } else if (pathName.includes("/resume")) {
+        route = "Resume";
+      }
+
+      setIsLoading(true);
+      setNavClass("grey");
+      setCurrentRoute(route);
+      setShowExternal(false);
+
+      const timeout = setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+
+      previousPathRef.current = pathName;
+
+      return () => clearTimeout(timeout);
+    }
+  }, [location, setCurrentRoute, setIsLoading, setNavClass, setShowExternal]);
 
   if (isLoading) {
     return <Loading />;

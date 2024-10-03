@@ -71,7 +71,7 @@
       border-radius: 0.75vw;
       text-decoration: none;
       justify-content: center;
-      transition: all 1s ease-in-out;
+      transition: background-color 1s ease-in-out;
       background-color: rgba(10, 10, 10, 0.9);
 
       h1 {
@@ -107,20 +107,17 @@
 
         &__link {
           height: 100%;
-
-          a {
-            height: 100%;
-            display: flex;
-            padding: 0 1vw;
-            font-size: 1.1vw;
-            align-items: center;
-            border-radius: 0.5vw;
-            text-decoration: none;
-            justify-content: center;
-            color: rgb(228, 228, 228);
-            transition: all 1s ease-in-out;
-            border: 1px solid rgb(82, 82, 82);
-          }
+          display: flex;
+          padding: 0 1vw;
+          cursor: pointer;
+          font-size: 1.1vw;
+          align-items: center;
+          border-radius: 0.5vw;
+          text-decoration: none;
+          justify-content: center;
+          color: rgb(228, 228, 228);
+          transition: all 1s ease-in-out;
+          border: 1px solid rgb(82, 82, 82);
         }
       }
     }
