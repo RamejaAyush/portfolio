@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import "../styles/blogs.scss";
+import { Link } from "react-router-dom";
 
 const Blog = () => {
   return (

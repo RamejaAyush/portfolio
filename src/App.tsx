@@ -1,15 +1,17 @@
 import Lenis from "lenis";
-import { Suspense, lazy } from "react";
 import { useEffect, useRef } from "react";
+import { Suspense, lazy, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 const Home = lazy(() => import("./components/Home"));
 const Blogs = lazy(() => import("./components/Blogs"));
 const Resume = lazy(() => import("./components/Resume"));
+const Loading = lazy(() => import("./components/Loading"));
 
 function App() {
   const rafId = useRef<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const initializeAnimation = () => {
@@ -37,9 +39,23 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <div className="app">
-      <Suspense fallback={<h1>Loading...</h1>}>
+      <Suspense fallback={<Loading />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blogs" element={<Blogs />} />

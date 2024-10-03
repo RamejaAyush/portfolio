@@ -60,7 +60,7 @@ const Home = () => {
                           <div className="home__landing__wrapper__content__introduction__cta__blogs__preview__wrapper__outer-layer__text">
                             <p>
                               <span className="trade">AXU</span>{" "}
-                              <span className="badge">• blogs</span>
+                              <span className="badge">blogs</span>
                             </p>
                           </div>
                           <div className="home__landing__wrapper__content__introduction__cta__blogs__preview__wrapper__outer-layer__bottom"></div>
