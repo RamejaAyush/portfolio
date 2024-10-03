@@ -5,13 +5,39 @@ import { projects } from "../utils/projectData";
 import profilePic from "../assets/image/profile.png";
 import backgroundVideo from "../assets/video/bg-video.mp4";
 
+import { motion } from "framer-motion";
+
 const Home = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.4,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <div className="home">
       <div className="home__landing">
-        <div className="home__landing__wrapper">
+        <motion.div
+          className="home__landing__wrapper"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="home__landing__wrapper__content">
-            <div className="home__landing__wrapper__content__introduction">
+            <motion.div
+              variants={itemVariants}
+              className="home__landing__wrapper__content__introduction"
+            >
               <div className="home__landing__wrapper__content__introduction__title">
                 <div className="home__landing__wrapper__content__introduction__title__profile-picture">
                   <img src={profilePic} alt="Ayush Rameja" />
@@ -31,7 +57,10 @@ const Home = () => {
                   </div>
                 </div>
               </div>
-              <div className="home__landing__wrapper__content__introduction__cta">
+              <motion.div
+                variants={itemVariants}
+                className="home__landing__wrapper__content__introduction__cta"
+              >
                 <div className="home__landing__wrapper__content__introduction__cta__projects">
                   <Link to={"/resume"}>
                     <div className="home__landing__wrapper__content__introduction__cta__projects__text">
@@ -69,9 +98,12 @@ const Home = () => {
                     </div>
                   </Link>
                 </div>
-              </div>
-            </div>
-            <div className="home__landing__wrapper__content__experience">
+              </motion.div>
+            </motion.div>
+            <motion.div
+              variants={itemVariants}
+              className="home__landing__wrapper__content__experience"
+            >
               <div className="home__landing__wrapper__content__experience__content">
                 <p>
                   I'm a CS Engineer turned software developer with a{" "}
@@ -95,14 +127,17 @@ const Home = () => {
                   Bridgei2i)
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
-          <div className="home__landing__wrapper__video">
+          <motion.div
+            variants={itemVariants}
+            className="home__landing__wrapper__video"
+          >
             <video autoPlay={true} muted loop>
               <source src={backgroundVideo} type="video/mp4" />
             </video>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
       <div className="home__projects">
         <div className="home__projects__header">

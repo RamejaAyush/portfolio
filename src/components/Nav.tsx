@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const Nav = () => {
+  const MotionLink = motion(Link);
   const currentRoute: string = "About";
   const [showExternal, setShowExternal] = useState(false);
   const [navClass, setNavClass] = useState<string>("grey");
@@ -43,7 +44,8 @@ const Nav = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <motion.div
+        <MotionLink
+          to={"/"}
           className="nav__wrapper__logo"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -52,7 +54,7 @@ const Nav = () => {
           <span className="nav__wrapper__logo__current-route">
             {currentRoute}
           </span>
-        </motion.div>
+        </MotionLink>
 
         <div className="nav__wrapper__links">
           <div className="nav__wrapper__links__wrapper">
