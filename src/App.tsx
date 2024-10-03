@@ -1,8 +1,10 @@
 import Lenis from "lenis";
+import "./styles/app.scss";
 import { useEffect, useRef } from "react";
 import { Suspense, lazy, useState } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
+const Nav = lazy(() => import("./components/Nav"));
 const Home = lazy(() => import("./components/Home"));
 const Blogs = lazy(() => import("./components/Blogs"));
 const Resume = lazy(() => import("./components/Resume"));
@@ -62,6 +64,7 @@ function App() {
           <Route path="/Resume" element={<Resume />} />
           <Route path="*" element={<Navigate replace to={"/"} />} />
         </Routes>
+        <Nav />
       </Suspense>
     </div>
   );
