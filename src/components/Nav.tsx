@@ -2,14 +2,13 @@ import "../styles/nav.scss";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAppStore } from "../store/store";
+import StaggeredText from "../utils/StaggerText";
 import { Link, useLocation } from "react-router-dom";
 
 const Nav = () => {
   const location = useLocation();
   const MotionLink = motion.create(Link);
 
-  const navClass = useAppStore((state) => state.navClass);
-  const setNavClass = useAppStore((state) => state.setNavClass);
   const showExternal = useAppStore((state) => state.showExternal);
   const currentRoute = useAppStore((state) => state.currentRoute);
   const setShowExternal = useAppStore((state) => state.setShowExternal);
@@ -17,21 +16,18 @@ const Nav = () => {
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > window.innerHeight * 0.5) {
-        setNavClass("themed");
         setShowExternal(true);
       } else {
-        setNavClass("grey");
         setShowExternal(false);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [setNavClass, setShowExternal]);
+  }, [setShowExternal]);
 
   useEffect(() => {
     if (location.pathname === "/") {
-      console.log(location.pathname);
       setShowExternal(false);
     }
   }, [location.pathname, setShowExternal]);
@@ -51,7 +47,7 @@ const Nav = () => {
   return (
     <motion.nav className="nav">
       <motion.div
-        className={`nav__wrapper ${navClass}`}
+        className={`nav__wrapper`}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -80,7 +76,7 @@ const Nav = () => {
                     variants={linkVariants}
                     className="nav__wrapper__links__wrapper__link"
                   >
-                    {link}
+                    <StaggeredText text={link} />
                   </motion.a>
                 ))
               : ["Portfolio", "Blogs", "Resume"].map(
@@ -96,7 +92,7 @@ const Nav = () => {
                         link === "Portfolio" ? "/" : `/${link.toLowerCase()}`
                       }`}
                     >
-                      {link}
+                      <StaggeredText text={link} />
                     </MotionLink>
                   )
                 )}

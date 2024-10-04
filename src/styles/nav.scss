@@ -1,4 +1,6 @@
 .nav {
+  --animation-duration: 400ms;
+
   z-index: 1000;
   position: fixed;
   left: 0;
@@ -27,39 +29,6 @@
     backdrop-filter: blur(1px);
     background-color: #4a4a4a90;
     transition: all 1s ease-in-out;
-
-    &.themed {
-      background-color: #dd00ff27;
-
-      .nav__wrapper__logo {
-        background-color: #6d007e;
-
-        &__current-route {
-          font-size: 1.2vw;
-          color: #ffffff;
-          padding-left: 1vw;
-          border-left: 1px solid #dd00ff27;
-        }
-      }
-
-      .nav__wrapper__links {
-        background-color: #37003f;
-
-        &__wrapper {
-          &__link {
-            color: #ffffff;
-            border-color: #ffffff !important;
-          }
-        }
-      }
-
-      .nav__wrapper__external {
-        a {
-          border: 1px solid #6d007e;
-          background-color: #6d007e;
-        }
-      }
-    }
 
     &__logo {
       gap: 1vw;
@@ -104,18 +73,84 @@
         align-items: center;
 
         &__link {
+          z-index: 1;
           height: 100%;
           display: flex;
-          padding: 0 1vw;
-          cursor: pointer;
           font-size: 1.1vw;
+          overflow: hidden;
+          position: relative;
           align-items: center;
           border-radius: 0.5vw;
           text-decoration: none;
           justify-content: center;
           color: rgb(228, 228, 228);
-          transition: all 1s ease-in-out;
+
+          padding: 0 1vw;
           border: 1px solid rgb(82, 82, 82);
+          transition: all var(--animation-duration) ease-in-out;
+
+          .staggered-text {
+            transition: all var(--animation-duration) ease-in-out;
+
+            span {
+              position: relative;
+              display: inline-block;
+              transform: translateY(0);
+              transition: all var(--animation-duration) ease-in-out;
+              transition-delay: calc(25ms * var(--i));
+
+              &::before {
+                position: absolute;
+                font-size: 1.1vw;
+                color: #fff;
+                font-weight: 500;
+                top: 10vh;
+                content: attr(data-hover);
+                transform: translate3d(0, 0, 0);
+                white-space: pre;
+              }
+            }
+          }
+
+          &::before {
+            content: "";
+            z-index: -1;
+            left: 0;
+            top: 0;
+            scale: 2;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            position: absolute;
+            border-radius: 100%;
+            transition: all var(--animation-duration) ease-in-out;
+            background-color: #181818;
+            transform: translate(-100%, 100%);
+          }
+
+          &:hover {
+            color: var(--white);
+            border: 1px solid #181818;
+
+            .staggered-text span {
+              transform: translateY(-10vh);
+              transition-delay: calc(25ms * var(--i));
+            }
+
+            &::before {
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              transform: translate(0, 0);
+            }
+          }
+
+          &.active {
+            border-color: #361a46;
+            background-color: #361a46;
+            color: var(--purple-light);
+          }
         }
       }
     }
@@ -127,21 +162,47 @@
       border-radius: 1.25vw;
 
       a {
+        z-index: 1;
         height: 100%;
         display: flex;
         padding: 0 1vw;
         color: white;
+        overflow: hidden;
         font-size: 1.25vw;
-        border-radius: 0.75vw;
+        position: relative;
         align-items: center;
         text-decoration: none;
+        border-radius: 0.75vw;
         justify-content: center;
+        transition: all 1s ease-in-out;
         border: 1px solid rgba(24, 24, 24, 0.9);
         background-color: rgba(24, 24, 24, 0.9);
-        transition: all 1s ease-in-out;
 
         &.blogs-link {
           padding: 0 1.5vw;
+        }
+
+        &:hover {
+          color: black;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          z-index: -1;
+          top: 100%;
+          bottom: 0;
+          right: 100%;
+          background-color: white;
+          transition: all 400ms ease-in-out;
+          border-radius: 100%;
+        }
+
+        &:hover::before {
+          top: 0;
+          right: 0;
+          scale: 2;
         }
       }
     }
