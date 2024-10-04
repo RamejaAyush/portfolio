@@ -5,9 +5,21 @@ import { projects } from "../utils/projectData";
 import profilePic from "../assets/image/profile.png";
 import backgroundVideo from "../assets/video/bg-video.mp4";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [name, setName] = useState("");
+  const [message, setMessage] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const [prevName, setPrevName] = useState("");
+  const [prevMessage, setPrevMessage] = useState("");
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -24,8 +36,31 @@ const Home = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (name === prevName && message === prevMessage) {
+      setIsDisabled(true);
+    } else {
+      setPrevName(name);
+      setPrevMessage(message);
+      setIsSubmitted(true);
+      setIsDisabled(false);
+
+      toast.info(`Thanks for the message, ${name}!`);
+    }
+  };
+
+  useEffect(() => {
+    if (name !== prevName || message !== prevMessage) {
+      setIsSubmitted(false);
+      setIsDisabled(false);
+    }
+  }, [name, message, prevName, prevMessage]);
+
   return (
     <div className="home">
+      <ToastContainer theme="dark" progressStyle={{ background: "#d700c9" }} />
       <div id="about" className="home__landing">
         <motion.div
           className="home__landing__wrapper"
@@ -174,7 +209,7 @@ const Home = () => {
                   </ul>
                 </div>
                 <div className="home__projects__container__project__content__cta">
-                  <Link to={`${project.link}`}>See More</Link>
+                  {project.link && <Link to={`${project.link}`}>See More</Link>}
                 </div>
               </div>
             </div>
@@ -190,13 +225,15 @@ const Home = () => {
               </h1>
             </div>
             <div className="home__contact__wrapper__form__inputs">
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="name">
                   <label htmlFor="name">Name</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                     required
                     placeholder="Please enter your name… if you dare."
                   />
@@ -206,12 +243,19 @@ const Home = () => {
                   <textarea
                     name="message"
                     id="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     required
                     placeholder="Say something smart or funny, no pressure."
                   ></textarea>
                 </div>
                 <div className="submit">
-                  <input type="submit" value="Send" />
+                  <input
+                    className={isSubmitted ? "disable" : "enabled"}
+                    type="submit"
+                    value="Send"
+                    disabled={isDisabled}
+                  />
                 </div>
               </form>
             </div>
@@ -221,9 +265,11 @@ const Home = () => {
               <h1>Links</h1>
             </div>
             <div className="home__contact__wrapper__links__buttons">
-              <Link to={"/"}>Mail</Link>
-              <Link to={"/"}>LinkedIn</Link>
-              <Link to={"/"}>GitHub</Link>
+              <Link to={"mailto:ayushrameja@gmail.com"}>Mail</Link>
+              <Link to={"https://www.linkedin.com/in/ayushrameja/"}>
+                LinkedIn
+              </Link>
+              <Link to={"https://github.com/RamejaAyush"}>GitHub</Link>
             </div>
           </div>
         </div>
