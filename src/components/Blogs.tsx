@@ -1,15 +1,37 @@
 import "../styles/blogs.scss";
+import { motion } from "framer-motion";
 
 const Blog = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
-    <div className="blogs">
-      <div className="blogs__content">
-        <div className="blogs__content__empty-state">
-          <h1>No blogs found!</h1>
-          <p>Working on them.</p>
-        </div>
-      </div>
-    </div>
+    <motion.div
+      className="blogs"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div className="blogs__content">
+        <motion.div className="blogs__content__empty-state">
+          <motion.h1 variants={itemVariants}>No blogs found!</motion.h1>
+          <motion.p variants={itemVariants}>Working on them.</motion.p>
+        </motion.div>
+      </motion.div>
+    </motion.div>
   );
 };
 

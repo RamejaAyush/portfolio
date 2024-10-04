@@ -47,10 +47,8 @@
 
         &__wrapper {
           &__link {
-            a {
-              border-color: #adadad;
-              color: #ffffff;
-            }
+            color: #ffffff;
+            border-color: #ffffff !important;
           }
         }
       }
