@@ -1,4 +1,5 @@
 import "../styles/blogs.scss";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Blog = () => {
@@ -17,6 +18,10 @@ const Blog = () => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
+
+  useEffect(() => {
+    document.title = "Blogs: Ayush Rameja";
+  }, []);
 
   return (
     <motion.div

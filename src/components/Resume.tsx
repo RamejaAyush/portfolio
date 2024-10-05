@@ -1,4 +1,5 @@
 import "../styles/resume.scss";
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 
 const Resume = () => {
@@ -16,6 +17,10 @@ const Resume = () => {
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 1 } },
   };
+
+  useEffect(() => {
+    document.title = "Resume: Ayush Rameja";
+  }, []);
 
   return (
     <motion.div
