@@ -1,45 +1,97 @@
+import Lenis from "lenis";
 import "./styles/app.scss";
-import { lazy, Suspense } from "react";
-import Loading from "./components/loading";
-import { useState, useEffect } from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Suspense, lazy } from "react";
+import { useEffect, useRef } from "react";
+import { useAppStore } from "./store/store";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
-const Home = lazy(() => import("./components/home"));
-const Blogs = lazy(() => import("./components/blogs"));
-const Resume = lazy(() => import("./components/resume"));
-const Projects = lazy(() => import("./components/project"));
+const Nav = lazy(() => import("./components/Nav"));
+const Home = lazy(() => import("./components/Home"));
+const Blogs = lazy(() => import("./components/Blogs"));
+const Resume = lazy(() => import("./components/Resume"));
+const Loading = lazy(() => import("./components/Loading"));
 
 function App() {
+  const rafId = useRef<number | null>(null);
+  const lenisRef = useRef<Lenis | null>(null);
+  const previousPathRef = useRef<string | null>(null);
+
+  const isLoading = useAppStore((state) => state.isLoading);
+  const setNavClass = useAppStore((state) => state.setNavClass);
+  const setIsLoading = useAppStore((state) => state.setIsLoading);
+  const setCurrentRoute = useAppStore((state) => state.setCurrentRoute);
+  const setShowExternal = useAppStore((state) => state.setShowExternal);
+
   const location = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+    const initializeAnimation = () => {
+      lenisRef.current = new Lenis({
+        lerp: 0.1,
+      });
+
+      const raf = (time: number) => {
+        if (lenisRef.current) {
+          lenisRef.current.raf(time);
+        }
+        rafId.current = requestAnimationFrame(raf);
+      };
+
+      rafId.current = requestAnimationFrame(raf);
+    };
+
+    window.addEventListener("load", initializeAnimation);
 
     return () => {
-      clearTimeout(timeout);
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
+      }
+      window.removeEventListener("load", initializeAnimation);
     };
   }, []);
+
+  useEffect(() => {
+    const pathName = location.pathname;
+
+    if (previousPathRef.current !== pathName) {
+      let route = "Home";
+      if (pathName.includes("/blogs")) {
+        route = "Blogs";
+      } else if (pathName.includes("/resume")) {
+        route = "Resume";
+      }
+
+      setIsLoading(true);
+      setNavClass("grey");
+      setCurrentRoute(route);
+      setShowExternal(false);
+
+      const timeout = setTimeout(() => {
+        setIsLoading(false);
+      }, 1500);
+
+      previousPathRef.current = pathName;
+
+      return () => clearTimeout(timeout);
+    }
+  }, [location, setCurrentRoute, setIsLoading, setNavClass, setShowExternal]);
 
   if (isLoading) {
     return <Loading />;
   }
 
   return (
-    <Suspense fallback={<Loading />}>
-      <div className="notification">
-        <h1>New design coming soon...</h1>
-      </div>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" Component={Home} />
-        <Route path="/blogs" Component={Blogs} />
-        <Route path="/resume" Component={Resume} />
-        <Route path="/projects" Component={Projects} />
-        <Route path="*" Component={Home} />
-      </Routes>
-    </Suspense>
+    <div className="app">
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/Resume" element={<Resume />} />
+          <Route path="*" element={<Navigate replace to={"/"} />} />
+        </Routes>
+        <Nav />
+      </Suspense>
+    </div>
   );
 }
 

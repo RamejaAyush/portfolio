@@ -1,32 +1,72 @@
-.resume-header {
+.resume {
   width: 100%;
-  height: 15vh;
-  display: grid;
-  place-items: center;
-  background: rgb(73, 73, 73);
+  padding: 2dvh;
+  height: 100dvh;
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  flex-direction: column-reverse;
 
-  a {
-    font-size: 1rem;
-    color: white;
-    text-decoration: none;
-    padding: 1rem;
-    border: 1px solid;
-    border-radius: 5px;
-    transition: all 250ms ease-in-out;
+  .resume__iframe {
+    width: 100%;
+    border: none;
+    height: 80dvh;
+    border-radius: 0.5dvw;
+  }
 
-    &:hover {
-      background-color: black;
+  .action-button {
+    z-index: 10;
+    top: 3.5dvh;
+    left: 2dvw;
+    height: 10dvh;
+    position: absolute;
+
+    a {
+      padding: 1dvw;
+      display: flex;
+      color: rgb(255, 255, 255);
+      font-size: 1.25dvw;
+      align-items: center;
+      border-radius: 0.25dvw;
+      text-decoration: none;
+      justify-content: center;
+      border: 1px solid rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.479);
+      backdrop-filter: blur(1px);
+    }
+  }
+
+  @media (max-width: 600px) {
+    height: 86dvh;
+    flex-direction: column;
+
+    .resume__iframe {
+      height: 75dvh;
     }
 
-    @media (max-width: 768px) {
-      .responsive-text {
-        font-size: 1.5rem;
-      }
-    }
+    .action-button {
+      position: relative;
+      width: 100%;
+      height: 10dvh;
+      display: flex;
+      margin-top: 2dvh;
+      border-radius: 2dvw;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      left: 0;
 
-    @media (max-width: 480px) {
-      .responsive-text {
-        font-size: 1rem;
+      a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        color: white;
+        font-size: 5dvw;
+        border-radius: 2dvw;
+        align-items: center;
+        text-decoration: none;
+        justify-content: center;
+        border: 1px solid white;
       }
     }
   }
