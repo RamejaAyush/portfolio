@@ -59,9 +59,6 @@ const Nav = () => {
           animate={{ opacity: 1 }}
         >
           <h1>AXU</h1>
-          <span className="nav__wrapper__logo__current-route">
-            {currentRoute}
-          </span>
         </MotionLink>
         <div className="nav__wrapper__links">
           <div className="nav__wrapper__links__wrapper">

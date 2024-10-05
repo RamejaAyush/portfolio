@@ -1,6 +1,5 @@
 import "../styles/resume.scss";
 import { motion } from "framer-motion";
-import ResumeFile from "../assets/resume/Ayush Rameja's Resume.pdf";
 
 const Resume = () => {
   const containerVariants = {
@@ -25,14 +24,21 @@ const Resume = () => {
       animate="visible"
       variants={containerVariants}
     >
-      <motion.div className="resume__content" variants={iframeVariants}>
-        <motion.iframe
-          src={ResumeFile}
-          title="Ayush Rameja's Resume"
-          className="resume__iframe"
-          variants={iframeVariants}
-        ></motion.iframe>
-      </motion.div>
+      <motion.iframe
+        src="https://drive.google.com/file/d/1KH4dnH50ocYFxv0Cut7gqMltRDHgC088/preview"
+        title="Ayush Rameja's Resume"
+        className="resume__iframe"
+        variants={iframeVariants}
+      ></motion.iframe>
+      <div className="action-button">
+        <a
+          href="https://drive.google.com/uc?export=download&id=1KH4dnH50ocYFxv0Cut7gqMltRDHgC088"
+          download
+          className="download-button"
+        >
+          Download Resume
+        </a>
+      </div>
     </motion.div>
   );
 };

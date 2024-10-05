@@ -207,4 +207,51 @@
       }
     }
   }
+
+  @media (max-width: 600px) {
+    top: 83vh;
+
+    &__wrapper {
+      gap: 1vw;
+      padding: 1.5vw;
+      height: 12vh;
+      border-radius: 2vw;
+
+      &__logo {
+        padding: 0 4vw;
+        border-radius: 2vw;
+
+        h1 {
+          font-size: 5vw;
+        }
+      }
+
+      &__links {
+        &__wrapper {
+          gap: 1vw;
+          padding: 1vw;
+          border-radius: 2vw;
+
+          &__link {
+            font-size: 5vw;
+            padding: 0 3vw;
+            border-radius: 2vw;
+
+            .staggered-text {
+              span {
+                &::before {
+                  position: absolute;
+                  font-size: 5vw;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &__external {
+        display: none;
+      }
+    }
+  }
 }
