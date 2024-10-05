@@ -29,9 +29,6 @@ function App() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div className="notification">
-        <h1>New design coming soon...</h1>
-      </div>
       <Routes location={location} key={location.pathname}>
         <Route path="/" Component={Home} />
         <Route path="/blogs" Component={Blogs} />
