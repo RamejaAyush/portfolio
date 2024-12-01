@@ -99,7 +99,7 @@ const Home = () => {
                 <div className="home__landing__wrapper__content__introduction__cta__projects">
                   <Link to={"/resume"}>
                     <div className="home__landing__wrapper__content__introduction__cta__projects__text">
-                      <p>{`< Resume Rundown >`}</p>
+                      <p>Resume</p>
                     </div>
                     <div className="home__landing__wrapper__content__introduction__cta__projects__preview">
                       <div className="home__landing__wrapper__content__introduction__cta__projects__preview__wrapper">
@@ -116,7 +116,7 @@ const Home = () => {
                 <div className="home__landing__wrapper__content__introduction__cta__blogs">
                   <Link to={"/blogs"}>
                     <div className="home__landing__wrapper__content__introduction__cta__blogs__text">
-                      <p>{`< Blog Overflow >`}</p>
+                      <p>Blogs</p>
                     </div>
                     <div className="home__landing__wrapper__content__introduction__cta__blogs__preview">
                       <div className="home__landing__wrapper__content__introduction__cta__blogs__preview__wrapper">
