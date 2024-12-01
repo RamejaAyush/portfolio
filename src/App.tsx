@@ -1,4 +1,3 @@
-import Lenis from "lenis";
 import "./styles/app.scss";
 import { Suspense, lazy } from "react";
 import { useEffect, useRef } from "react";
@@ -12,8 +11,6 @@ const Resume = lazy(() => import("./components/Resume"));
 const Loading = lazy(() => import("./components/Loading"));
 
 function App() {
-  const rafId = useRef<number | null>(null);
-  const lenisRef = useRef<Lenis | null>(null);
   const previousPathRef = useRef<string | null>(null);
 
   const isLoading = useAppStore((state) => state.isLoading);
@@ -23,32 +20,6 @@ function App() {
   const setShowExternal = useAppStore((state) => state.setShowExternal);
 
   const location = useLocation();
-
-  useEffect(() => {
-    const initializeAnimation = () => {
-      lenisRef.current = new Lenis({
-        lerp: 0.1,
-      });
-
-      const raf = (time: number) => {
-        if (lenisRef.current) {
-          lenisRef.current.raf(time);
-        }
-        rafId.current = requestAnimationFrame(raf);
-      };
-
-      rafId.current = requestAnimationFrame(raf);
-    };
-
-    window.addEventListener("load", initializeAnimation);
-
-    return () => {
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current);
-      }
-      window.removeEventListener("load", initializeAnimation);
-    };
-  }, []);
 
   useEffect(() => {
     const pathName = location.pathname;
@@ -65,14 +36,9 @@ function App() {
       setNavClass("grey");
       setCurrentRoute(route);
       setShowExternal(false);
-
-      const timeout = setTimeout(() => {
-        setIsLoading(false);
-      }, 1500);
+      setIsLoading(false);
 
       previousPathRef.current = pathName;
-
-      return () => clearTimeout(timeout);
     }
   }, [location, setCurrentRoute, setIsLoading, setNavClass, setShowExternal]);
 
