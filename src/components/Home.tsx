@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { IProject } from "../models/IProject";
 import { projects } from "../utils/projectData";
 import profilePic from "../assets/image/profile.png";
-import backgroundVideo from "../assets/video/bg-video.mp4";
+import backgroundVideo from "../assets/Video/bg-video.mp4";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
